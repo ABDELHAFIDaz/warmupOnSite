@@ -106,15 +106,15 @@ def appreciation():
                 
         
         if 0 <= average < 10:
-            print(f"{student['name']} {student['surname']} -> {average} -> Fail")
+            print(f"{student['name']} {student['surname']} -> {average:.2f} -> Fail")
         elif 10 <= average < 12:
-            print(f"{student['name']} {student['surname']} -> {average} -> Pass")
+            print(f"{student['name']} {student['surname']} -> {average:.2f} -> Pass")
         elif 12 <= average < 16:
-            print(f"{student['name']} {student['surname']} -> {average} -> Good")
+            print(f"{student['name']} {student['surname']} -> {average:.2f} -> Good")
         elif 16 <= average < 20:
-            print(f"{student['name']} {student['surname']} -> {average} -> Very Good")
+            print(f"{student['name']} {student['surname']} -> {average:.2f} -> Very Good")
         else:
-            print(f"{student['name']} {student['surname']} -> {average} -> Off range")
+            print(f"{student['name']} {student['surname']} -> {average:.2f} -> Off range")
             
     
     if best_students:
@@ -142,7 +142,7 @@ def show_students():
     print("=========================================\n")
         
     for student in STUDENTS:
-        print(f"{student['name']} {student['surname']} with the average of: {calcule_average(student)}\n")
+        print(f"{student['name']} {student['surname']} with the average of: {calcule_average(student):.2f}\n")
     
 # menu=============================================================================
     
