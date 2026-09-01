@@ -13,7 +13,7 @@ def main():
             case '2':
                 show_students()
             case '3':
-                
+                appreciation()
             case '4':
                 print("That's all for this time")
                 break
@@ -39,11 +39,10 @@ def calcule_average(student):
 # when adding a student======================================================================
 
 def add_student() -> None:
-    
-    while name := input("name: ").strip() == "":
+    while (name := input("name: ")).strip() == "":
         pass
     
-    while surname := input("surname: ").strip() == "":
+    while (surname := input("surname: ")).strip() == "":
         pass
     
     notes = []
@@ -70,16 +69,74 @@ def add_student() -> None:
         }
     
     STUDENTS.append(student)
+    print(f'{student['name']} is successfully added')
     
     
-# pick a student for their average
+# appreciation=============================================================================================
 
+def appreciation():
+    
+    if is_students_empty(): return
+    
+    print("\n=========================================")
+    print("        STUDENTS-APPRECIATION       ")
+    print("=========================================\n")
+    
+    best_students = []
+    worst_students = []
+    max = -1
+    min = 21
+    
+    for student in STUDENTS:
+        
+        average = calcule_average(student)
+        
+        
+        if not (0 > average or average > 20):
+            if average > max:
+                best_students = [student['name']]
+                max = average
+            elif average < min:
+                worst_students = [student['name']]
+                min = average
+            elif average == max:
+                best_students.append(student['name'])
+            elif average == min:
+                worst_students.append(student['name'])
+                
+        
+        if 0 <= average < 10:
+            print(f"{student['name']} {student['surname']} -> {average} -> Fail")
+        elif 10 <= average < 12:
+            print(f"{student['name']} {student['surname']} -> {average} -> Pass")
+        elif 12 <= average < 16:
+            print(f"{student['name']} {student['surname']} -> {average} -> Good")
+        elif 16 <= average < 20:
+            print(f"{student['name']} {student['surname']} -> {average} -> Very Good")
+        else:
+            print(f"{student['name']} {student['surname']} -> {average} -> Off range")
+            
+    
+    if best_students:
+        print("Best student(s):", end="")
+        for std in best_students:
+            print(std, end=", ")
+            
+    print()
+          
+    if worst_students:
+        print("Worst student(s):", end="")
+        for std in worst_students:
+            print(std, end=", ")
 
     
  
  # show students=========================================================================
     
 def show_students():
+    
+    if is_students_empty(): return
+    
     print("=========================================")
     print("        STUDENT-AVERAGE       ")
     print("=========================================\n")
@@ -96,10 +153,18 @@ def show_menu():
     print("=========================================")
     print("1. Add a student")
     print("2. Show all students")
-    print("3. Average of a student")
+    print("3. Appreciation of all student")
     print("4. Quit")
 
 
+def is_students_empty():
+    if len(STUDENTS) == 0:
+        print("============================================================================")
+        print("        THERE IS NO STUDENT IN THE SYSTEM NOW, (press 1 to add one)      ")
+        print("============================================================================\n")
+        return True
+    
+    return False
 
 
 if __name__ == "__main__":
