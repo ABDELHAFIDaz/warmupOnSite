@@ -1,0 +1,34 @@
+# Byte-compiled / Python internal cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments & Virtual Envs
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment Variables & Secrets
+.env
+.env.local
+*.env
+
+# IDEs & Code Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
+
+# Data & Logs (Optional - customize based on your needs)
+*.log
+*.csv
+*.json
