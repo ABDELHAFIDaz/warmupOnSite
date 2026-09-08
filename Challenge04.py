@@ -73,8 +73,62 @@ class BankAccount:
         if rate > 0:
             return amount * rate
 
+# Bloc 3 ===============================================================
+
+from abc import ABC, abstractclassmethod
+
+class Vehicule(ABC):
+    def __init__(self, brand, registration):
+        self.brand = brand
+        self.__registration = registration
+    
+    @abstractclassmethod  
+    def tarif_journalier(self):
+        pass
+    
+    def __str__(self):
+        return f'{self.__class__.__name__} -- {self.brand} -- {self.__registration}'
+    
+    
+class Car(Vehicule):
+    def __init__(self, brand, registration, num_seats, base=20):
+        super().__init__(brand, registration)
+        self.num_seats = num_seats
+        self.__tarif = base + num_seats
+    
+    def tarif_journalier(self):
+        return self.__tarif
+
+    def __str__(self):
+        return super().__str__() + f' -- {self.num_seats} seats -- {self.__tarif}/day'
+    
+    
+    
+class Bike(Vehicule):
+    def __init__(self, brand, registration, cylindree, base=10):
+        super().__init__(brand, registration)
+        self.cylindree = cylindree
+        self.__tarif = base + cylindree
+
+    def tarif_journalier(self):
+        return self.__tarif
+
+    def __str__(self):
+        return super().__str__() + f' -- {self.cylindree} cylindree -- {self.__tarif}/day'
 
 
+class truck(Vehicule):
+    def __init__(self, brand, registration, charge_utile, base=40):
+        super().__init__(brand, registration)
+        self.charge_utile = charge_utile
+        self.__tarif = base + self.charge_utile
+        
+    def tarif_journalier(self):
+        return self.__tarif
+
+    def __str__(self):
+        return super().__str__() + f' -- {self.charge_utile} charge_utile -- {self.__tarif}/day'
+    
 
 def main():
     # bloc 1:
@@ -105,8 +159,22 @@ def main():
     # print(acc.bank_accounts)
     # print(acc.num_of_accounts())
     
+    # bloc 3:
     
+    # garage = [
+    #     Car('audi', 32323, 5),
+    #     Bike('bmw', 123321, 8),
+    #     truck('renault', 112233, 100)
+    # ]
+        
+    # for vehicule in garage:
+    #     print(vehicule.brand, "->", vehicule.tarif_journalier())
     
+    # for vehicule in garage:
+    #     print(vehicule)
+        
+        
+        
     
 if __name__ == '__main__':
     main()
