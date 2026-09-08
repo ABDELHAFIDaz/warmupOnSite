@@ -41,7 +41,39 @@ class Member:
     
     def borrowed_books_stats(self):
         return len(self.borrowed_books)
+    
+# Bloc 2 ===============================================================
+
+class BankAccount:
+    
+    bank_accounts = 0
+    
+    def __init__(self, balance):
+        self.__balance = balance
+        BankAccount.bank_accounts += 1
         
+    @property
+    def balance(self):
+        return self.__balance
+    
+    def deposit(self, amount):
+        if 0 < amount:
+            self.__balance += amount
+        
+    def withdraw(self, amount):
+        if amount <= self.__balance:
+            self.__balance -= amount
+            
+    @classmethod
+    def num_of_accounts(cls):
+        return cls.bank_accounts
+    
+    @staticmethod
+    def convert_currency(amount, rate):
+        if rate > 0:
+            return amount * rate
+
+
 
 
 def main():
@@ -62,8 +94,16 @@ def main():
     
     # member1.return_book(english_book)
     
+    # bloc 2:
     
-    
+    # acc = BankAccount(500)
+    # # BankAccount.bank_accounts = 0 # this will change it for all the instances since we've used the class name to call the property
+    # acc.deposit(100)
+    # print(acc.balance)
+    # acc.withdraw(50)
+    # print(acc.balance)
+    # print(acc.bank_accounts)
+    # print(acc.num_of_accounts())
     
     
     
