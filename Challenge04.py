@@ -256,7 +256,7 @@ def main():
     #     resultat = pipeline.executer(data, entree=5)
     #     print(type(pipeline.modele).__name__, "->", resultat)
     
-    
+    pass
     
     
 if __name__ == '__main__':
