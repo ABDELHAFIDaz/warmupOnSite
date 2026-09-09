@@ -179,7 +179,7 @@ class Pipeline:
         self.modele = modele
         
     def executer(self, data, entree):
-        scaled_data = normaliser(data)
+        scaled_data = self.pretraitement(data)
         self.modele.entrainer(scaled_data)
         return self.modele.predire(entree)
     
