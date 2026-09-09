@@ -130,6 +130,60 @@ class truck(Vehicule):
         return super().__str__() + f' -- {self.charge_utile} charge_utile -- {self.__tarif}/day'
     
 
+# Bloc 3 ===============================================================
+
+class Modele(ABC):
+    @abstractclassmethod
+    def entrainer(self, data):
+        pass
+    
+    @abstractclassmethod
+    def predire(self, entree):
+        pass
+
+from statistics import mean
+
+class ModeleMoyenne(Modele):
+    def entrainer(self, data):
+        if data:
+            self.moyenne = mean(data)
+    
+    def predire(self, entree):
+        if self.moyenne:
+            return self.moyenne
+        return 0
+
+class ModeleLineaireSimple(Modele):
+    
+    def __init__(self, poids, biais):
+        self.poids = poids
+        self.biais = biais
+        
+        
+    def entrainer(self, data):
+        if data:
+            self.data = data
+    
+    def predire(self, entree):
+        try:
+            y = (self.poids * float(entree)) + self.biais
+            return y 
+        except (ValueError, TypeError):
+            return 'ERROR: Invalid entree'
+    
+
+class Pipeline:
+    
+    def __init__(self, pretraitement, modele):
+        self.pretraitement = pretraitement
+        self.modele = modele
+        
+    def executer(self, data, entree):
+        scaled_data = normaliser(data)
+        self.modele.entrainer(scaled_data)
+        return self.modele.predire(entree)
+    
+
 def main():
     # bloc 1:
     
@@ -173,8 +227,37 @@ def main():
     # for vehicule in garage:
     #     print(vehicule)
         
+    # bloc 4:
+    
+    # #md = Modele() # Error cuz we can't instantiate from an abstract class
+    
+    # data = [5, 8, 11]
+    # modele = ModeleMoyenne()
+    # modele.entrainer(data)
+    # print(modele.predire(999))
+    
+    # modele = ModeleLineaireSimple(poids=2, biais=1)
+    # modele.entrainer(data=None)
+    # print(modele.predire(5))
+    
+    # mini challenge final:
         
-        
+    # def normaliser(data):
+    #     maximum = max(data)
+    #     return [d / maximum for d in data]
+    
+    # pipeline_moyenne = Pipeline(pretraitement=normaliser, modele=ModeleMoyenne())
+    # pipeline_lineaire = Pipeline(pretraitement=normaliser, modele=
+    # ModeleLineaireSimple(2, 1))
+    
+    # data = [5, 8, 11]
+    
+    # for pipeline in [pipeline_moyenne, pipeline_lineaire]:
+    #     resultat = pipeline.executer(data, entree=5)
+    #     print(type(pipeline.modele).__name__, "->", resultat)
+    
+    
+    
     
 if __name__ == '__main__':
     main()
