@@ -130,7 +130,7 @@ class truck(Vehicule):
         return super().__str__() + f' -- {self.charge_utile} charge_utile -- {self.__tarif}/day'
     
 
-# Bloc 3 ===============================================================
+# Bloc 4 ===============================================================
 
 class Modele(ABC):
     @abstractclassmethod
